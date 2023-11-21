@@ -12,11 +12,7 @@ function! floaterm#wrapper#lf#(cmd, jobopts, ...) abort
     let s:lf_command = 'lf'
   endif
 
-  if has('win32')
-    let cmd = s:lf_command . ' ' . '-last-dir-path=' . lastdir_tmpfile . ' -selection-path=' . lf_tmpfile
-  else
-    let cmd = s:lf_command . ' ' . '-last-dir-path="' . lastdir_tmpfile . '" -selection-path="' . lf_tmpfile . '"'
-  endif
+  let cmd = s:lf_command . ' ' . '-last-dir-path=' . fnameescape(lastdir_tmpfile) . ' -selection-path=' . fnameescape(lf_tmpfile)
 
   if len(cmdlist) > 1
     let cmd .= ' ' . join(cmdlist[1:], ' ')
